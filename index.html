@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>A Little Something For You 💌</title>
+  <link
+    rel="icon"
+    type="image/svg+xml"
+    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ctext y='50' font-size='48'%3E%F0%9F%92%8C%3C/text%3E%3C/svg%3E"
+  />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Fredoka:wght@500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Quicksand:wght@500;600;700&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- Ambient Floating Sparkles & Hearts Layer -->
+  <div id="particles-layer" aria-hidden="true"></div>
+  <div id="burst-layer" aria-hidden="true"></div>
+
+  <!-- Main Scrapbook Viewport -->
+  <main class="scrapbook-stage" role="main" aria-label="Interactive Apology Scrapbook">
+    <!-- Persistent Polka-Dot Paper & Gingham Scrapbook Frame -->
+    <div class="paper-bg" aria-hidden="true"></div>
+
+    <!-- Corner Gingham Patches with Masking Tape -->
+    <div class="gingham-patch patch-tl" aria-hidden="true">
+      <span class="tape tape-tl"></span>
+    </div>
+    <div class="gingham-patch patch-br" aria-hidden="true">
+      <span class="tape tape-br"></span>
+    </div>
+
+    <!-- Top Hanging Ribbon Garlands (injected via illustrations.js) -->
+    <div class="hanging-decor hanging-left" id="decor-ribbon-left" aria-hidden="true"></div>
+    <div class="hanging-decor hanging-right" id="decor-ribbon-right" aria-hidden="true"></div>
+
+    <!-- Top Utility Bar -->
+    <header class="top-bar">
+      <div class="page-badge" id="page-badge">Page 1 of 9</div>
+      <div class="top-controls">
+        <button
+          type="button"
+          class="icon-pill"
+          id="sound-toggle"
+          aria-label="Toggle gentle sound effects"
+          title="Sound effects: On"
+        >
+          <span class="sound-icon" id="sound-icon">🔊</span>
+          <span class="sound-label">Chimes</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Slides Container -->
+    <div class="slides-viewport" id="slides-viewport">
+
+      <!-- ==================== PAGE 1: COVER ==================== -->
+      <section class="slide active" data-slide="0" aria-label="Page 1: A Little Something For You">
+        <div class="slide-inner cover-layout">
+          <!-- Left Collage Cluster (like the video's Polaroid + Stickers) -->
+          <div class="cover-collage-left">
+            <div class="polaroid tilt-left anim-pop" style="--delay: 0.1s">
+              <span class="tape tape-top"></span>
+              <div class="polaroid-art" id="art-cover-kitty"></div>
+              <p class="polaroid-caption">made with a soft heart 💌</p>
+            </div>
+            <div class="sticker-badge badge-sorry-note anim-float" style="--delay: 0.25s">
+              <span>pls read?</span>
+            </div>
+            <div class="sticker-slot cover-heart-doodle" id="art-doodle-hearts"></div>
+          </div>
+
+          <!-- Right Cover Letter & Ransom-Cutout Title -->
+          <div class="cover-content-right">
+            <div class="cutout-title anim-pop" style="--delay: 0.15s" aria-label="A LITTLE SOMETHING FOR YOU">
+              <span class="cutout-word">
+                <span class="c-tile c-rose r-n3">A</span>
+              </span>
+              <span class="cutout-word">
+                <span class="c-tile c-cream r-2">L</span>
+                <span class="c-tile c-plum r-n2">I</span>
+                <span class="c-tile c-blush r-3">T</span>
+                <span class="c-tile c-cream r-n1">T</span>
+                <span class="c-tile c-rose r-2">L</span>
+                <span class="c-tile c-sage r-n2">E</span>
+              </span>
+              <span class="cutout-word">
+                <span class="c-tile c-plum r-1">S</span>
+                <span class="c-tile c-cream r-n3">O</span>
+                <span class="c-tile c-blush r-2">M</span>
+                <span class="c-tile c-rose r-n1">E</span>
+                <span class="c-tile c-cream r-3">T</span>
+                <span class="c-tile c-plum r-n2">H</span>
+                <span class="c-tile c-sage r-1">I</span>
+                <span class="c-tile c-blush r-n3">N</span>
+                <span class="c-tile c-rose r-2">G</span>
+              </span>
+              <span class="cutout-word">
+                <span class="c-tile c-cream r-n2">F</span>
+                <span class="c-tile c-rose r-2">O</span>
+                <span class="c-tile c-plum r-n1">R</span>
+                <span class="c-tile c-spacer"></span>
+                <span class="c-tile c-blush r-3">Y</span>
+                <span class="c-tile c-cream r-n2">O</span>
+                <span class="c-tile c-rose r-1">U</span>
+              </span>
+            </div>
+
+            <div class="cover-note-card anim-up" style="--delay: 0.3s">
+              <span class="tape tape-top-right"></span>
+              <p class="salutation">Hey you,</p>
+              <p class="cover-quote">
+                "I made a little something for you. It's not much, but there's a lot of love, a little guilt, and a whole lot of feelings behind it. So, please take a minute and go through this?"
+              </p>
+              <button type="button" class="open-letter-btn" id="btn-open-letter">
+                <span>Open This Please💌</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== PAGE 2: BEFORE ANYTHING ELSE ==================== -->
+      <section class="slide" data-slide="1" aria-label="Page 2: Before Anything Else">
+        <div class="slide-inner split-scrapbook">
+          <div class="notebook-sheet anim-up" style="--delay: 0.1s">
+            <span class="tape tape-top-left"></span>
+            <span class="tape tape-top-right"></span>
+            <div class="sheet-margin-line" aria-hidden="true"></div>
+
+            <div class="sheet-header">
+              <span class="eyebrow-tag">BEFORE ANYTHING ELSE</span>
+              <h2 class="script-heading">I OWE YOU AN APOLOGY🥺🥺</h2>
+            </div>
+
+            <div class="lined-body">
+              <p>
+                I've been thinking about what happened, and honestly, I feel really bad about the things I said. I know I hurt you, and I hate that I became the reason for making you feel that way. I wish I had handled things differently. I can't undo what I said, but I really want you to know that I am sorry. And no, I'm not just saying this because we're upset right now.
+              </p>
+            </div>
+
+            <div class="sheet-footer-note">
+              <button type="button" class="interactive-chip" id="btn-mend-heart">
+                <span id="mend-heart-icon">💔</span>
+                <span id="mend-heart-text">Tap to send a gentle hug</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="side-stickers-col">
+            <div class="sticker-card anim-pop" style="--delay: 0.25s" id="art-apology-kitty"></div>
+            <div class="mini-polaroid tilt-right anim-pop" style="--delay: 0.35s">
+              <span class="tape tape-top"></span>
+              <div class="mini-art" id="art-bandaid-heart"></div>
+              <p class="polaroid-caption">truly, deeply sorry</p>
+            </div>
+            <div class="sticker-pop-zone" id="page2-pop-stickers" aria-hidden="true"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== PAGE 3: FAVOURITE PERSON ==================== -->
+      <section class="slide" data-slide="2" aria-label="Page 3: You Know What">
+        <div class="slide-inner filmstrip-layout">
+          <!-- Vintage Filmstrip on Left (like Video 00:36!) -->
+          <div class="filmstrip-column anim-pop" style="--delay: 0.15s">
+            <div class="filmstrip">
+              <div class="film-holes-left" aria-hidden="true"></div>
+              <div class="film-frames">
+                <div class="film-frame" id="art-film-1"></div>
+                <div class="film-frame" id="art-film-2"></div>
+                <div class="film-frame" id="art-film-3"></div>
+              </div>
+              <div class="film-holes-right" aria-hidden="true"></div>
+            </div>
+            <div class="film-sticker-overlap" id="art-blush-kitty"></div>
+          </div>
+
+          <!-- Letter Card on Right -->
+          <div class="paper-card-warm anim-up" style="--delay: 0.2s">
+            <span class="tape tape-top"></span>
+            <span class="eyebrow-tag">YOU KNOW WHAT..??</span>
+            <h2 class="serif-heading">YOU ARE MINE FAVOURITE PERSON♥️🫂</h2>
+            <p class="letter-paragraph">
+              Sometimes I wonder if you really understand how much space you have in my heart. You're the person I want to tell the most random things to, the person I want to share my smallest happiness with, and the person whose presence can make an ordinary day feel special. You're the person whose smallest messages can make me smile, whose silence can make me overthink and whose happiness genuinely matters to me. I love your childish side, your silly talks, your moods, your smile and even those little things you do that sometimes annoy me🤧😙
+            </p>
+            <div class="corner-doodle" id="art-little-flower"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== PAGE 4: NEVER FORGET ==================== -->
+      <section class="slide" data-slide="3" aria-label="Page 4: Things I Never Want You To Forget">
+        <div class="slide-inner checklist-layout">
+          <div class="checklist-header anim-pop" style="--delay: 0.1s">
+            <span class="eyebrow-tag">READ THIS TWICE</span>
+            <h2 class="cutout-banner">THINGS I NEVER WANT YOU TO FORGET!!!!🙂↕️</h2>
+          </div>
+
+          <div class="checklist-board">
+            <ul class="sticky-checklist" id="forget-checklist">
+              <li class="check-item anim-up" style="--delay: 0.12s">
+                <button type="button" class="check-pill" aria-pressed="false">
+                  <span class="heart-bullet">🤍</span>
+                  <span>I love having you in my life</span>
+                </button>
+              </li>
+              <li class="check-item anim-up" style="--delay: 0.17s">
+                <button type="button" class="check-pill" aria-pressed="false">
+                  <span class="heart-bullet">🤍</span>
+                  <span>Your smile is one of my favourite things</span>
+                </button>
+              </li>
+              <li class="check-item anim-up" style="--delay: 0.22s">
+                <button type="button" class="check-pill" aria-pressed="false">
+                  <span class="heart-bullet">🤍</span>
+                  <span>Our stupid little conversations mean everything</span>
+                </button>
+              </li>
+              <li class="check-item anim-up" style="--delay: 0.27s">
+                <button type="button" class="check-pill" aria-pressed="false">
+                  <span class="heart-bullet">🤍</span>
+                  <span>I'm grateful for every memory we've made</span>
+                </button>
+              </li>
+              <li class="check-item anim-up" style="--delay: 0.32s">
+                <button type="button" class="check-pill" aria-pressed="false">
+                  <span class="heart-bullet">🤍</span>
+                  <span>You are loved, even on the days we fight</span>
+                </button>
+              </li>
+              <li class="check-item anim-up" style="--delay: 0.37s">
+                <button type="button" class="check-pill" aria-pressed="false">
+                  <span class="heart-bullet">🤍</span>
+                  <span>I never want you to feel unimportant to me</span>
+                </button>
+              </li>
+              <li class="check-item check-item-wide anim-up" style="--delay: 0.42s">
+                <button type="button" class="check-pill" aria-pressed="false">
+                  <span class="heart-bullet">🤍</span>
+                  <span>Most importantly you really mean so much to me and I really care for you🫶🏻</span>
+                </button>
+              </li>
+            </ul>
+
+            <div class="pinned-confession anim-pop" style="--delay: 0.45s">
+              <span class="tape tape-top"></span>
+              <div class="confession-sticker" id="art-teary-bunny"></div>
+              <p>
+                So if I said don’t talk ever let’s end all this I never ever mean it I am saying all this out of my anger🥹😭
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== PAGE 5: REDO THAT MOMENT ==================== -->
+      <section class="slide" data-slide="4" aria-label="Page 5: If I Could Redo That Moment">
+        <div class="slide-inner split-scrapbook reverse-mobile">
+          <div class="redo-visual-col anim-pop" style="--delay: 0.15s">
+            <div class="polaroid redo-polaroid" id="redo-polaroid">
+              <span class="tape tape-top"></span>
+              <div class="polaroid-art" id="art-redo-scene"></div>
+              <p class="polaroid-caption" id="redo-caption">what I wish I did instead...</p>
+            </div>
+            <button type="button" class="interactive-chip redo-btn" id="btn-redo-moment">
+              <span>↺</span>
+              <span id="redo-btn-label">Rewind &amp; Hug Instead</span>
+            </button>
+          </div>
+
+          <div class="notebook-sheet warm-tint anim-up" style="--delay: 0.1s">
+            <span class="tape tape-top-right"></span>
+            <div class="sheet-margin-line" aria-hidden="true"></div>
+            <div class="sheet-header">
+              <span class="eyebrow-tag">IF I COULD TURN BACK TIME</span>
+              <h2 class="script-heading">IF I COULD REDO THAT MOMENT💔</h2>
+            </div>
+            <div class="lined-body">
+              <p class="lead-line">I’d choose my words more carefully..</p>
+              <p>
+                If I could go back to that moment, I'd hug you instead of saying those things. I'd try to understand you instead of letting my anger speak for me. I know saying sorry doesn't magically make everything okay, but I promise I'll try to be more mindful of how I talk to you, especially when we're upset🥹Your feelings matter to me too and I never want you to feel otherwise.😘😘
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== PAGE 6: OPEN JOURNAL SPREAD ==================== -->
+      <section class="slide" data-slide="5" aria-label="Page 6: Let's Not Predict A Goodbye">
+        <div class="slide-inner journal-wrapper">
+          <!-- Open Two-Page Journal with Binder Clips (matching Video 00:42-00:47!) -->
+          <div class="open-journal anim-up" style="--delay: 0.1s">
+            <div class="binder-clip clip-left" id="art-clip-left" aria-hidden="true"></div>
+            <div class="binder-clip clip-right" id="art-clip-right" aria-hidden="true"></div>
+
+            <!-- Left Journal Page -->
+            <div class="journal-page journal-left">
+              <div class="journal-polaroid tilt-left">
+                <span class="tape tape-top"></span>
+                <div class="mini-art" id="art-journal-couple"></div>
+                <p class="polaroid-caption">us, growing stronger</p>
+              </div>
+              <p class="journal-hand-quote">
+                “One difficult chapter doesn’t write the whole book.”
+              </p>
+              <div class="journal-stickers-row">
+                <div class="sticker-mini" id="art-star-sticker"></div>
+                <div class="sticker-mini" id="art-moon-sticker"></div>
+              </div>
+            </div>
+
+            <div class="journal-spine" aria-hidden="true"></div>
+
+            <!-- Right Journal Page -->
+            <div class="journal-page journal-right">
+              <span class="eyebrow-tag">LOOKING AHEAD</span>
+              <h2 class="serif-heading">LET’S NOT PREDICT A GOODBYE🥺</h2>
+              <p class="journal-body">
+                I don't know exactly what tomorrow holds for us, and I don't want to predict a future where we end up losing each other. Instead, I want to believe that we can grow together, understand each other better and become stronger with time. Let's not decide the ending of our story during a difficult chapter. We still have so much time, things and so many memories left to create😶🥰
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== PAGE 7: OUR LITTLE SO CALLED STORY ==================== -->
+      <section class="slide" data-slide="6" aria-label="Page 7: Our Little So Called Story">
+        <div class="slide-inner story-layout">
+          <div class="story-card anim-up" style="--delay: 0.1s">
+            <span class="tape tape-top-left"></span>
+            <span class="eyebrow-tag">OUR LITTLE SO CALLED ‘STORY’</span>
+            <h2 class="script-heading">Can we go back making this memories</h2>
+            <p class="letter-paragraph">
+              I want more of this. More random pictures, more late-night talks, more teasing each other, more food dates, more hugs, more laughter, and all those little moments that make us US. I don't expect us to never fight, because that's not real life. I just want us to never forget that we're on the same team😌💞
+            </p>
+          </div>
+
+          <!-- 3 Interactive Keepsake Polaroids (Echoing Video's 3-Gift Selection!) -->
+          <div class="keepsake-trio">
+            <button type="button" class="keepsake-card tilt-left anim-pop" style="--delay: 0.2s" data-keepsake="talks">
+              <span class="tape tape-top"></span>
+              <div class="keepsake-art" id="art-story-1"></div>
+              <span class="keepsake-label">Late-night talks</span>
+            </button>
+            <button type="button" class="keepsake-card anim-pop" style="--delay: 0.28s" data-keepsake="dates">
+              <span class="tape tape-top"></span>
+              <div class="keepsake-art" id="art-story-2"></div>
+              <span class="keepsake-label">Food dates &amp; laughs</span>
+            </button>
+            <button type="button" class="keepsake-card tilt-right anim-pop" style="--delay: 0.36s" data-keepsake="team">
+              <span class="tape tape-top"></span>
+              <div class="keepsake-art" id="art-story-3"></div>
+              <span class="keepsake-label">Same team, always</span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== PAGE 8: A LITTLE PROMISE ==================== -->
+      <section class="slide" data-slide="7" aria-label="Page 8: A Little Promise From My Side">
+        <div class="slide-inner promise-layout">
+          <div class="promise-card anim-up" style="--delay: 0.1s">
+            <span class="tape tape-top-left"></span>
+            <span class="tape tape-top-right"></span>
+
+            <span class="eyebrow-tag">A LITTLE PROMISE FROM MY SIDE🤞🏻</span>
+            <h2 class="serif-heading">I’ll try to be better</h2>
+
+            <p class="letter-paragraph">
+              I'm not promising that I'll never make mistakes again, because I'm human too. But I am promising that I'll try to understand you better, listen instead of reacting, and be more careful with the words I use. I don't want to just tell you that you matter to me. I want you to feel it through the way I treat you🫠💖
+            </p>
+
+            <div class="promise-seal-row">
+              <div class="pinky-art" id="art-pinky-promise"></div>
+              <button type="button" class="wax-seal-btn" id="btn-wax-seal">
+                <span class="seal-circle" id="wax-seal-visual">🤞🏻</span>
+                <span class="seal-caption" id="wax-seal-label">Tap to seal this promise</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== PAGE 9: THE LAST PAGE ==================== -->
+      <section class="slide" data-slide="8" aria-label="Page 9: The Last Page">
+        <div class="slide-inner finale-layout">
+          <div class="finale-bouquet-col anim-pop" style="--delay: 0.15s">
+            <div class="bouquet-sticker" id="art-bouquet-kitty"></div>
+            <p class="bouquet-tag">some flowers for you 🌸</p>
+          </div>
+
+          <div class="finale-letter-card anim-up" style="--delay: 0.1s">
+            <span class="tape tape-top"></span>
+            <span class="eyebrow-tag">FROM MY HEART</span>
+            <h2 class="script-heading">THE LAST PAGE🥺</h2>
+
+            <p class="letter-paragraph">
+              I miss my happy place, and a big part of that is you. I'm sorry for being hurtful. I really love you, you really matters most to me😌🫂♥️
+            </p>
+            <p class="letter-paragraph">
+              And I hope we get to turn this little difficult chapter into just another story we look back at someday. No pressure to forget everything instantly ( but don’t take much time pls🥺) I just wanted to remind you that you're worth so much to me♥️
+            </p>
+            <p class="ps-line">
+              P.S - I love you, I miss you, I crave for you and you know that right.???♥️
+            </p>
+
+            <div class="finale-cta-row">
+              <button type="button" class="open-letter-btn" id="btn-open-question">
+                <span>One last question... 🥺💌</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- Bottom Slide Navigation Bar -->
+    <nav class="bottom-nav" aria-label="Slide navigation">
+      <button type="button" class="nav-arrow" id="btn-prev" aria-label="Previous page">
+        ‹ Back
+      </button>
+
+      <div class="dots-track" id="dots-track" role="tablist" aria-label="Pages"></div>
+
+      <button type="button" class="nav-arrow nav-next" id="btn-next" aria-label="Next page">
+        Next ›
+      </button>
+    </nav>
+  </main>
+
+  <!-- ==================== INTERACTIVE KITTEN GATE MODAL (Video 00:13-00:23 Tribute!) ==================== -->
+  <div class="modal-backdrop" id="gate-modal" hidden role="dialog" aria-modal="true" aria-labelledby="gate-title">
+    <div class="gate-card">
+      <span class="tape tape-top"></span>
+
+      <!-- State 1: Ask -->
+      <div class="gate-state" id="gate-state-ask">
+        <div class="gate-kitty" id="art-gate-kitty-ask"></div>
+        <h2 class="gate-title" id="gate-title">Accept my apology? 🥺</h2>
+        <p class="gate-subtitle">Promise I'll make it up to you with hugs &amp; food dates</p>
+        <div class="gate-buttons">
+          <button type="button" class="gate-btn gate-yes" id="btn-gate-yes">YES ♥️</button>
+          <button type="button" class="gate-btn gate-no" id="btn-gate-no">NO</button>
+        </div>
+      </div>
+
+      <!-- State 2: Playful "Please try again" (exactly like Video 00:17!) -->
+      <div class="gate-state" id="gate-state-retry" hidden>
+        <div class="gate-kitty" id="art-gate-kitty-sad"></div>
+        <h2 class="gate-title">Please try again 🥺</h2>
+        <p class="gate-subtitle">Look at this little face... pretty please?</p>
+        <div class="gate-buttons">
+          <button type="button" class="gate-btn gate-yes" id="btn-gate-okay">OKAY</button>
+        </div>
+      </div>
+
+      <!-- State 3: Yay Accepted! -->
+      <div class="gate-state" id="gate-state-yay" hidden>
+        <div class="gate-kitty" id="art-gate-kitty-happy"></div>
+        <h2 class="gate-title">Yay!! Thank you, my love 🥰♥️</h2>
+        <p class="gate-subtitle">
+          I love you, I miss you, and I can't wait to hug you tight! 🫂💞
+        </p>
+        <div class="gate-buttons">
+          <button type="button" class="gate-btn gate-yes" id="btn-gate-close">Read again 💌</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Keepsake Toast Popup for Page 7 Polaroids -->
+  <div class="keepsake-toast" id="keepsake-toast" hidden role="status" aria-live="polite"></div>
+
+  <script src="illustrations.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
