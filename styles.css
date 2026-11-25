@@ -600,7 +600,7 @@ body {
 .notebook-sheet {
   position: relative;
   background: #fffdf9;
-  padding: 28px 32px 26px 46px;
+  padding: 22px 28px 20px 44px;
   border-radius: 8px;
   box-shadow: var(--shadow-paper);
   border: 1px solid rgba(160, 118, 125, 0.2);
@@ -1361,6 +1361,157 @@ body {
   animation: popIn 0.55s cubic-bezier(0.22, 1, 0.36, 1) var(--delay, 0s) both;
 }
 
+.slide.active .anim-float {
+  animation:
+    popIn 0.55s cubic-bezier(0.34, 1.56, 0.64, 1) var(--delay, 0s) both,
+    gentleFloat 3.8s ease-in-out calc(var(--delay, 0s) + 0.55s) infinite;
+}
+
+/* ==================== SEQUENTIAL TEXT & TILE APPEARANCE ==================== */
+
+@keyframes tilePop {
+  0% { opacity: 0; transform: translateY(14px) scale(0.55) rotate(-10deg); }
+  70% { opacity: 1; transform: translateY(-3px) scale(1.08) rotate(3deg); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes wordReveal {
+  0% {
+    opacity: 0;
+    transform: translateY(8px) scale(0.95);
+    filter: blur(2px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+@keyframes headingGlow {
+  0% { opacity: 0; transform: translateY(10px) scale(0.96); letter-spacing: 0.04em; }
+  100% { opacity: 1; transform: translateY(0) scale(1); letter-spacing: normal; }
+}
+
+.slide.active .c-tile {
+  animation: tilePop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) calc(var(--tile-i, 0) * 0.045s) both;
+}
+
+.slide.active .c-tile:hover {
+  transform: translateY(-4px) scale(1.12) rotate(0deg);
+  transition: transform 0.2s ease;
+}
+
+.reveal-word {
+  display: inline-block;
+  white-space: pre-wrap;
+  opacity: 0;
+}
+
+.slide.active .reveal-word {
+  animation: wordReveal 0.42s cubic-bezier(0.22, 1, 0.36, 1) calc(0.18s + var(--w, 0) * 0.024s) forwards;
+}
+
+.slide.active .script-heading,
+.slide.active .serif-heading,
+.slide.active .cutout-banner,
+.slide.active .salutation {
+  animation: headingGlow 0.55s cubic-bezier(0.22, 1, 0.36, 1) 0.14s both;
+}
+
+/* ==================== PER-PAGE DECORATIVE STICKERS ==================== */
+
+.deco-sticker {
+  position: absolute;
+  pointer-events: none;
+  z-index: 7;
+  filter: var(--shadow-sticker);
+}
+
+.p1-stamp { width: 78px; top: -30px; right: -22px; transform: rotate(12deg); }
+.p1-sparkle { width: 58px; bottom: -22px; left: -24px; }
+
+.p2-clip { width: 46px; top: -24px; left: 56px; transform: rotate(-10deg); }
+.p2-env { width: 72px; bottom: -26px; right: 24px; transform: rotate(8deg); }
+
+.p3-bear { width: 88px; top: -46px; right: 18px; transform: rotate(7deg); }
+.p3-notes { width: 62px; top: 14px; right: -28px; transform: rotate(10deg); }
+
+.checklist-header { position: relative; }
+.p4-daisy { width: 74px; top: -18px; left: -64px; transform: rotate(-12deg); }
+.p4-arrow { width: 82px; bottom: -10px; right: -78px; transform: rotate(8deg); }
+
+.p5-sparkle { width: 58px; top: -16px; left: -18px; }
+.p5-daisy { width: 64px; bottom: -14px; right: 12px; transform: rotate(12deg); }
+
+.p6-bear { width: 86px; bottom: -28px; right: -24px; transform: rotate(10deg); }
+.p6-arrow { width: 84px; top: -22px; left: 26%; transform: rotate(-8deg); }
+
+.p7-notes { width: 64px; top: -24px; right: 20px; transform: rotate(10deg); }
+.p7-stamp { width: 72px; bottom: -28px; left: -24px; transform: rotate(-11deg); }
+
+.p8-env { width: 72px; top: -28px; left: 48%; transform: rotate(-7deg); }
+.p8-daisy { width: 76px; top: -22px; right: -24px; transform: rotate(12deg); }
+
+.p9-bear { width: 84px; top: -44px; right: 22px; transform: rotate(6deg); }
+.p9-stamp { width: 72px; bottom: -24px; right: -22px; transform: rotate(11deg); }
+
+/* ==================== EPHEMERAL APPEAR & DISAPPEAR LAYER ==================== */
+
+#ephemeral-layer {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 8;
+  overflow: hidden;
+}
+
+.ephemeral-item {
+  position: absolute;
+  pointer-events: none;
+  animation: ephemeralLifecycle var(--life, 3.2s) cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.ephemeral-pill {
+  background: rgba(255, 250, 246, 0.94);
+  color: var(--rose-deep);
+  border: 1.5px solid rgba(216, 138, 153, 0.5);
+  font-family: var(--font-script);
+  font-size: 1.28rem;
+  font-weight: 700;
+  padding: 5px 14px;
+  border-radius: 999px;
+  box-shadow: 0 8px 18px rgba(82, 42, 54, 0.13);
+  white-space: nowrap;
+}
+
+.ephemeral-glyph {
+  font-size: var(--gsize, 24px);
+  filter: drop-shadow(0 4px 8px rgba(82, 42, 54, 0.14));
+}
+
+@keyframes ephemeralLifecycle {
+  0% {
+    opacity: 0;
+    transform: translateY(14px) scale(0.55) rotate(var(--r0, -8deg));
+  }
+  18% {
+    opacity: 1;
+    transform: translateY(0px) scale(1.06) rotate(var(--r1, 4deg));
+  }
+  30% {
+    transform: translateY(-4px) scale(1) rotate(var(--r1, 4deg));
+  }
+  75% {
+    opacity: 0.96;
+    transform: translateY(-10px) scale(1.02) rotate(var(--r2, -3deg));
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-24px) scale(0.72) rotate(var(--r2, -3deg));
+  }
+}
+
 /* ==================== RESPONSIVE DESIGN ==================== */
 
 @media (max-width: 900px) {
@@ -1403,6 +1554,15 @@ body {
   .gingham-patch {
     width: 160px;
     height: 140px;
+  }
+
+  .deco-sticker {
+    transform: scale(0.76);
+  }
+
+  .p4-daisy,
+  .p4-arrow {
+    display: none;
   }
 }
 

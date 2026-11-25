@@ -19,6 +19,208 @@
     window.mountIllustrations();
   }
 
+  const ephemeralLayer = document.getElementById("ephemeral-layer");
+
+  // ==================== WORD-BY-WORD & TILE TEXT REVEAL ====================
+  function setupTextAnimations() {
+    // Index Page 1 cutout letter tiles for popcorn pop-in
+    document.querySelectorAll(".c-tile:not(.c-spacer)").forEach((tile, idx) => {
+      tile.style.setProperty("--tile-i", idx);
+    });
+
+    // Wrap text in paragraphs/quotes/confessions for sequential appearing animation
+    const textTargets = document.querySelectorAll(
+      ".cover-quote, .lined-body p, .letter-paragraph, .journal-body, .ps-line, .pinned-confession p"
+    );
+
+    textTargets.forEach((el) => {
+      const originalText = el.textContent.trim().replace(/\s+/g, " ");
+      el.setAttribute("aria-label", originalText);
+      el.textContent = "";
+      const words = originalText.split(" ");
+      words.forEach((word, idx) => {
+        const span = document.createElement("span");
+        span.className = "reveal-word";
+        // Cap delay spread so long paragraphs finish cleanly in ~2.2s
+        const cappedIdx = Math.min(idx, 68);
+        span.style.setProperty("--w", cappedIdx);
+        span.textContent = idx < words.length - 1 ? `${word} ` : word;
+        el.appendChild(span);
+      });
+    });
+  }
+
+  function replaySlideAnimations(slide) {
+    // Force reflow on active slide so CSS animations replay cleanly on revisit
+    const animated = slide.querySelectorAll(
+      ".anim-pop, .anim-up, .anim-float, .c-tile, .reveal-word, .script-heading, .serif-heading, .cutout-banner, .salutation"
+    );
+    animated.forEach((node) => {
+      node.style.animation = "none";
+    });
+    void slide.offsetWidth;
+    animated.forEach((node) => {
+      node.style.animation = "";
+    });
+  }
+
+  // ==================== PER-PAGE APPEARING & DISAPPEARING ELEMENTS ====================
+  // Each page has unique whispers/stickers and varied anchor zones around the edges
+  const PAGE_EPHEMERAL_CONFIG = [
+    {
+      // Page 1
+      items: ["psst... open me 💌", "made with love ♥", "for my favourite human", "🥺👉👈", "✨", "🌸"],
+      zones: [
+        { left: "4%", top: "24%" },
+        { right: "4%", top: "18%" },
+        { left: "6%", bottom: "14%" },
+        { right: "6%", bottom: "16%" },
+        { left: "44%", top: "10%" },
+      ],
+    },
+    {
+      // Page 2
+      items: ["I'm really sorry 🥺", "hate making u sad", "hug? 🫂", "❤️‍🩹", "please forgive me", "🫶🏻"],
+      zones: [
+        { left: "3%", top: "18%" },
+        { right: "4%", top: "15%" },
+        { left: "5%", bottom: "14%" },
+        { right: "5%", bottom: "18%" },
+        { left: "58%", top: "10%" },
+      ],
+    },
+    {
+      // Page 3
+      items: ["my fav person ♥", "love your smile :)", "thinking of u", "🤧😙", "🎵", "✨"],
+      zones: [
+        { left: "4%", top: "16%" },
+        { right: "4%", top: "18%" },
+        { left: "3%", bottom: "15%" },
+        { right: "5%", bottom: "14%" },
+        { left: "35%", top: "9%" },
+      ],
+    },
+    {
+      // Page 4
+      items: ["read every point ♥", "you matter most", "didn't mean it 😭", "🫶🏻", "always loved", "🌸"],
+      zones: [
+        { left: "3%", top: "22%" },
+        { right: "3%", top: "20%" },
+        { left: "4%", bottom: "12%" },
+        { right: "4%", bottom: "13%" },
+        { left: "16%", top: "11%" },
+      ],
+    },
+    {
+      // Page 5
+      items: ["wish I could rewind ↺", "hugging u tight 🫂", "ur feelings matter", "💔→❤️‍🩹", "😘"],
+      zones: [
+        { left: "4%", top: "17%" },
+        { right: "4%", top: "16%" },
+        { left: "4%", bottom: "14%" },
+        { right: "6%", bottom: "15%" },
+        { left: "46%", top: "9%" },
+      ],
+    },
+    {
+      // Page 6
+      items: ["no goodbyes 🥺", "stronger together", "more chapters left", "🌙✨", "🥰"],
+      zones: [
+        { left: "3%", top: "20%" },
+        { right: "3%", top: "22%" },
+        { left: "5%", bottom: "13%" },
+        { right: "4%", bottom: "15%" },
+        { left: "48%", top: "9%" },
+      ],
+    },
+    {
+      // Page 7
+      items: ["food dates soon? 🍟", "late-night talks 🌙", "same team! 😌", "📸", "💞"],
+      zones: [
+        { left: "4%", top: "18%" },
+        { right: "4%", top: "18%" },
+        { left: "5%", bottom: "16%" },
+        { right: "5%", bottom: "16%" },
+        { left: "22%", top: "10%" },
+      ],
+    },
+    {
+      // Page 8
+      items: ["pinky promise 🤞🏻", "I'll listen better", "I'll be gentler", "💖", "✨"],
+      zones: [
+        { left: "5%", top: "24%" },
+        { right: "5%", top: "22%" },
+        { left: "6%", bottom: "16%" },
+        { right: "6%", bottom: "15%" },
+        { left: "45%", top: "10%" },
+      ],
+    },
+    {
+      // Page 9
+      items: ["miss my happy place", "don't take long 🥺", "craving u ♥", "🌸", "🫂♥️"],
+      zones: [
+        { left: "4%", top: "18%" },
+        { right: "4%", top: "16%" },
+        { left: "5%", bottom: "14%" },
+        { right: "5%", bottom: "14%" },
+        { left: "42%", top: "9%" },
+      ],
+    },
+  ];
+
+  let ephemeralTimer = null;
+  let ephemeralStep = 0;
+
+  function spawnEphemeralForPage(pageIndex) {
+    if (!ephemeralLayer) return;
+    const cfg = PAGE_EPHEMERAL_CONFIG[pageIndex] || PAGE_EPHEMERAL_CONFIG[0];
+    const text = cfg.items[ephemeralStep % cfg.items.length];
+    const zone = cfg.zones[(ephemeralStep * 2 + pageIndex) % cfg.zones.length];
+    ephemeralStep += 1;
+
+    const el = document.createElement("div");
+    const isEmojiOnly = text.length <= 4;
+    el.className = `ephemeral-item ${isEmojiOnly ? "ephemeral-glyph" : "ephemeral-pill"}`;
+    el.textContent = text;
+
+    // Slight jitter within the safe zone so consecutive items never overlap identically
+    const jitterX = (Math.random() - 0.5) * 4;
+    const jitterY = (Math.random() - 0.5) * 4;
+    if (zone.left) el.style.left = `calc(${zone.left} + ${jitterX.toFixed(1)}%)`;
+    if (zone.right) el.style.right = `calc(${zone.right} + ${jitterX.toFixed(1)}%)`;
+    if (zone.top) el.style.top = `calc(${zone.top} + ${jitterY.toFixed(1)}%)`;
+    if (zone.bottom) el.style.bottom = `calc(${zone.bottom} + ${jitterY.toFixed(1)}%)`;
+
+    const lifeSec = 2.7 + Math.random() * 0.9;
+    el.style.setProperty("--life", `${lifeSec.toFixed(2)}s`);
+    el.style.setProperty("--r0", `${((Math.random() - 0.5) * 18).toFixed(1)}deg`);
+    el.style.setProperty("--r1", `${((Math.random() - 0.5) * 10).toFixed(1)}deg`);
+    el.style.setProperty("--r2", `${((Math.random() - 0.5) * 14).toFixed(1)}deg`);
+    if (isEmojiOnly) {
+      el.style.setProperty("--gsize", `${22 + Math.floor(Math.random() * 10)}px`);
+    }
+
+    ephemeralLayer.appendChild(el);
+    setTimeout(() => el.remove(), lifeSec * 1000 + 80);
+  }
+
+  function startEphemeralCycle(pageIndex) {
+    clearInterval(ephemeralTimer);
+    if (ephemeralLayer) ephemeralLayer.innerHTML = "";
+
+    // Spawn two staggered items quickly so the page feels immediately alive
+    setTimeout(() => {
+      if (currentIndex === pageIndex) spawnEphemeralForPage(pageIndex);
+    }, 350);
+    setTimeout(() => {
+      if (currentIndex === pageIndex) spawnEphemeralForPage(pageIndex);
+    }, 1050);
+
+    ephemeralTimer = setInterval(() => {
+      if (currentIndex === pageIndex) spawnEphemeralForPage(pageIndex);
+    }, 1750);
+  }
+
   // ==================== GENTLE WEB AUDIO CHIMES ====================
   function playTone(freq = 523.25, duration = 0.14, type = "sine", delay = 0) {
     if (!soundEnabled) return;
@@ -125,7 +327,10 @@
       const isActive = idx === currentIndex;
       slide.classList.toggle("active", isActive);
       slide.setAttribute("aria-hidden", String(!isActive));
-      if (isActive) slide.scrollTop = 0;
+      if (isActive) {
+        slide.scrollTop = 0;
+        replaySlideAnimations(slide);
+      }
     });
 
     const dots = dotsTrack.querySelectorAll(".dot-btn");
@@ -138,6 +343,7 @@
     pageBadge.textContent = `Page ${currentIndex + 1} of ${totalSlides}`;
     btnPrev.disabled = currentIndex === 0;
     btnNext.textContent = currentIndex === totalSlides - 1 ? "Answer 🥺" : "Next ›";
+    startEphemeralCycle(currentIndex);
     if (isUserAction) playSoftPop();
   }
 
@@ -348,7 +554,14 @@
     if (e.target === gateModal) closeGateModal();
   });
 
+  // ==================== BACKGROUND CLICK SPARKLE ====================
+  document.querySelector(".scrapbook-stage").addEventListener("click", (e) => {
+    if (e.target.closest("button, a, input")) return;
+    spawnBurst(e.clientX, e.clientY, ["✨", "♥️", "🌸", "💌"], 7);
+  });
+
   // ==================== INIT ====================
+  setupTextAnimations();
   initAmbientParticles();
   buildDots();
   goToSlide(0, false);

@@ -364,6 +364,93 @@ const SVG_ASSETS = {
       <path d="M148 42 C144 36, 136 39, 139 46 L148 54 L157 46 C160 39, 152 36, 148 42 Z" fill="#d94e6c"/>
     </svg>
   `,
+
+  postageStamp: `
+    <svg viewBox="0 0 110 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="8" y="8" width="94" height="104" rx="4" fill="#fffaf4" stroke="#d88a99" stroke-width="3" stroke-dasharray="6 4"/>
+      <rect x="16" y="16" width="78" height="88" rx="3" fill="#fdeef1" stroke="#b84b64" stroke-width="1.5"/>
+      <path d="M55 46 C47 34, 28 40, 35 56 L55 75 L75 56 C82 40, 63 34, 55 46 Z" fill="#d94e6c"/>
+      <text x="55" y="94" text-anchor="middle" fill="#b84b64" font-family="Fredoka, sans-serif" font-weight="700" font-size="11">LOVE MAIL</text>
+    </svg>
+  `,
+
+  paperclipHeart: `
+    <svg viewBox="0 0 70 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M22 28 V62 C22 74, 48 74, 48 62 V24 C48 12, 28 12, 28 24 V54 C28 62, 42 62, 42 54 V30" stroke="#c98763" stroke-width="4.5" stroke-linecap="round"/>
+      <path d="M35 16 C30 9, 20 13, 24 21 L35 30 L46 21 C50 13, 40 9, 35 16 Z" fill="#e26e86" stroke="#fff" stroke-width="2"/>
+    </svg>
+  `,
+
+  daisyCluster: `
+    <svg viewBox="0 0 110 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <g transform="translate(36 42)">
+        <circle cx="0" cy="-14" r="8" fill="#fff"/>
+        <circle cx="13" cy="-4" r="8" fill="#fff"/>
+        <circle cx="8" cy="11" r="8" fill="#fff"/>
+        <circle cx="-8" cy="11" r="8" fill="#fff"/>
+        <circle cx="-13" cy="-4" r="8" fill="#fff"/>
+        <circle cx="0" cy="0" r="7" fill="#f7c863"/>
+      </g>
+      <g transform="translate(76 56) scale(0.75)">
+        <circle cx="0" cy="-14" r="8" fill="#fde3e8"/>
+        <circle cx="13" cy="-4" r="8" fill="#fde3e8"/>
+        <circle cx="8" cy="11" r="8" fill="#fde3e8"/>
+        <circle cx="-8" cy="11" r="8" fill="#fde3e8"/>
+        <circle cx="-13" cy="-4" r="8" fill="#fde3e8"/>
+        <circle cx="0" cy="0" r="7" fill="#f7c863"/>
+      </g>
+    </svg>
+  `,
+
+  musicNotes: `
+    <svg viewBox="0 0 90 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M26 54 V20 L58 14 V48" stroke="#b84b64" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+      <ellipse cx="20" cy="56" rx="8" ry="6" fill="#d97288"/>
+      <ellipse cx="52" cy="50" rx="8" ry="6" fill="#d97288"/>
+      <path d="M72 24 C69 19, 62 22, 65 27 L72 33 L79 27 C82 22, 75 19, 72 24 Z" fill="#f29bab"/>
+    </svg>
+  `,
+
+  peekingBear: `
+    <svg viewBox="0 0 120 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="34" cy="34" r="14" fill="#d8a47f" stroke="#5a382c" stroke-width="3"/>
+      <circle cx="86" cy="34" r="14" fill="#d8a47f" stroke="#5a382c" stroke-width="3"/>
+      <circle cx="34" cy="34" r="7" fill="#f5cbd3"/>
+      <circle cx="86" cy="34" r="7" fill="#f5cbd3"/>
+      <ellipse cx="60" cy="62" rx="38" ry="30" fill="#e5b998" stroke="#5a382c" stroke-width="3"/>
+      <ellipse cx="60" cy="68" rx="14" ry="11" fill="#fff3e8"/>
+      <circle cx="46" cy="54" r="4.5" fill="#3a2328"/>
+      <circle cx="74" cy="54" r="4.5" fill="#3a2328"/>
+      <ellipse cx="36" cy="64" rx="6" ry="3.5" fill="#f49fb0"/>
+      <ellipse cx="84" cy="64" rx="6" ry="3.5" fill="#f49fb0"/>
+      <ellipse cx="60" cy="64" rx="5" ry="3.5" fill="#5a382c"/>
+      <path d="M55 71 Q60 75 65 71" stroke="#5a382c" stroke-width="2.2" stroke-linecap="round"/>
+    </svg>
+  `,
+
+  cupidArrow: `
+    <svg viewBox="0 0 120 70" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <line x1="12" y1="48" x2="104" y2="20" stroke="#c98763" stroke-width="3" stroke-linecap="round"/>
+      <polygon points="106,19 94,16 98,27" fill="#b84b64"/>
+      <path d="M58 26 C52 16, 36 21, 41 34 L58 49 L75 34 C80 21, 64 16, 58 26 Z" fill="#e26e86" stroke="#fff" stroke-width="2.5"/>
+    </svg>
+  `,
+
+  sparkleCluster: `
+    <svg viewBox="0 0 90 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M38 14 L43 32 L61 37 L43 42 L38 60 L33 42 L15 37 L33 32 Z" fill="#f7d07a" stroke="#fff" stroke-width="2.5"/>
+      <path d="M68 50 L71 60 L81 63 L71 66 L68 76 L65 66 L55 63 L65 60 Z" fill="#f5cbd3" stroke="#b84b64" stroke-width="2"/>
+    </svg>
+  `,
+
+  tinyEnvelope: `
+    <svg viewBox="0 0 100 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="12" y="18" width="76" height="48" rx="7" fill="#fff" stroke="#b84b64" stroke-width="3"/>
+      <path d="M12 22 L50 48 L88 22" stroke="#b84b64" stroke-width="2.5" fill="none"/>
+      <circle cx="50" cy="45" r="9" fill="#d94e6c"/>
+      <path d="M50 41 C48 38, 44 40, 46 43 L50 47 L54 43 C56 40, 52 38, 50 41 Z" fill="#fff"/>
+    </svg>
+  `,
 };
 
 function mountIllustrations() {
@@ -394,6 +481,25 @@ function mountIllustrations() {
     "art-gate-kitty-ask": SVG_ASSETS.gateKittyAsk,
     "art-gate-kitty-sad": SVG_ASSETS.gateKittySad,
     "art-gate-kitty-happy": SVG_ASSETS.gateKittyHappy,
+    // Extra per-page scrapbook elements
+    "p1-stamp": SVG_ASSETS.postageStamp,
+    "p1-sparkle": SVG_ASSETS.sparkleCluster,
+    "p2-clip": SVG_ASSETS.paperclipHeart,
+    "p2-env": SVG_ASSETS.tinyEnvelope,
+    "p3-bear": SVG_ASSETS.peekingBear,
+    "p3-notes": SVG_ASSETS.musicNotes,
+    "p4-daisy": SVG_ASSETS.daisyCluster,
+    "p4-arrow": SVG_ASSETS.cupidArrow,
+    "p5-sparkle": SVG_ASSETS.sparkleCluster,
+    "p5-daisy": SVG_ASSETS.daisyCluster,
+    "p6-bear": SVG_ASSETS.peekingBear,
+    "p6-arrow": SVG_ASSETS.cupidArrow,
+    "p7-notes": SVG_ASSETS.musicNotes,
+    "p7-stamp": SVG_ASSETS.postageStamp,
+    "p8-env": SVG_ASSETS.tinyEnvelope,
+    "p8-daisy": SVG_ASSETS.daisyCluster,
+    "p9-bear": SVG_ASSETS.peekingBear,
+    "p9-stamp": SVG_ASSETS.postageStamp,
   };
 
   Object.entries(slots).forEach(([id, svg]) => {

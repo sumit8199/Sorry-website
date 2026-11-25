@@ -20,6 +20,8 @@
 <body>
   <!-- Ambient Floating Sparkles & Hearts Layer -->
   <div id="particles-layer" aria-hidden="true"></div>
+  <!-- Per-Page Appearing & Disappearing Elements Layer -->
+  <div id="ephemeral-layer" aria-hidden="true"></div>
   <div id="burst-layer" aria-hidden="true"></div>
 
   <!-- Main Scrapbook Viewport -->
@@ -113,6 +115,8 @@
 
             <div class="cover-note-card anim-up" style="--delay: 0.3s">
               <span class="tape tape-top-right"></span>
+              <div class="deco-sticker p1-stamp anim-pop" style="--delay: 0.42s" id="p1-stamp" aria-hidden="true"></div>
+              <div class="deco-sticker p1-sparkle anim-float" style="--delay: 0.35s" id="p1-sparkle" aria-hidden="true"></div>
               <p class="salutation">Hey you,</p>
               <p class="cover-quote">
                 "I made a little something for you. It's not much, but there's a lot of love, a little guilt, and a whole lot of feelings behind it. So, please take a minute and go through this?"
@@ -131,6 +135,8 @@
           <div class="notebook-sheet anim-up" style="--delay: 0.1s">
             <span class="tape tape-top-left"></span>
             <span class="tape tape-top-right"></span>
+            <div class="deco-sticker p2-clip anim-pop" style="--delay: 0.28s" id="p2-clip" aria-hidden="true"></div>
+            <div class="deco-sticker p2-env anim-float" style="--delay: 0.38s" id="p2-env" aria-hidden="true"></div>
             <div class="sheet-margin-line" aria-hidden="true"></div>
 
             <div class="sheet-header">
@@ -184,6 +190,8 @@
           <!-- Letter Card on Right -->
           <div class="paper-card-warm anim-up" style="--delay: 0.2s">
             <span class="tape tape-top"></span>
+            <div class="deco-sticker p3-bear anim-pop" style="--delay: 0.36s" id="p3-bear" aria-hidden="true"></div>
+            <div class="deco-sticker p3-notes anim-float" style="--delay: 0.3s" id="p3-notes" aria-hidden="true"></div>
             <span class="eyebrow-tag">YOU KNOW WHAT..??</span>
             <h2 class="serif-heading">YOU ARE MINE FAVOURITE PERSON♥️🫂</h2>
             <p class="letter-paragraph">
@@ -198,6 +206,8 @@
       <section class="slide" data-slide="3" aria-label="Page 4: Things I Never Want You To Forget">
         <div class="slide-inner checklist-layout">
           <div class="checklist-header anim-pop" style="--delay: 0.1s">
+            <div class="deco-sticker p4-daisy anim-float" style="--delay: 0.25s" id="p4-daisy" aria-hidden="true"></div>
+            <div class="deco-sticker p4-arrow anim-pop" style="--delay: 0.32s" id="p4-arrow" aria-hidden="true"></div>
             <span class="eyebrow-tag">READ THIS TWICE</span>
             <h2 class="cutout-banner">THINGS I NEVER WANT YOU TO FORGET!!!!🙂↕️</h2>
           </div>
@@ -276,6 +286,8 @@
 
           <div class="notebook-sheet warm-tint anim-up" style="--delay: 0.1s">
             <span class="tape tape-top-right"></span>
+            <div class="deco-sticker p5-sparkle anim-float" style="--delay: 0.3s" id="p5-sparkle" aria-hidden="true"></div>
+            <div class="deco-sticker p5-daisy anim-pop" style="--delay: 0.4s" id="p5-daisy" aria-hidden="true"></div>
             <div class="sheet-margin-line" aria-hidden="true"></div>
             <div class="sheet-header">
               <span class="eyebrow-tag">IF I COULD TURN BACK TIME</span>
@@ -298,6 +310,8 @@
           <div class="open-journal anim-up" style="--delay: 0.1s">
             <div class="binder-clip clip-left" id="art-clip-left" aria-hidden="true"></div>
             <div class="binder-clip clip-right" id="art-clip-right" aria-hidden="true"></div>
+            <div class="deco-sticker p6-bear anim-pop" style="--delay: 0.36s" id="p6-bear" aria-hidden="true"></div>
+            <div class="deco-sticker p6-arrow anim-float" style="--delay: 0.28s" id="p6-arrow" aria-hidden="true"></div>
 
             <!-- Left Journal Page -->
             <div class="journal-page journal-left">
@@ -334,6 +348,8 @@
         <div class="slide-inner story-layout">
           <div class="story-card anim-up" style="--delay: 0.1s">
             <span class="tape tape-top-left"></span>
+            <div class="deco-sticker p7-notes anim-float" style="--delay: 0.32s" id="p7-notes" aria-hidden="true"></div>
+            <div class="deco-sticker p7-stamp anim-pop" style="--delay: 0.4s" id="p7-stamp" aria-hidden="true"></div>
             <span class="eyebrow-tag">OUR LITTLE SO CALLED ‘STORY’</span>
             <h2 class="script-heading">Can we go back making this memories</h2>
             <p class="letter-paragraph">
@@ -368,6 +384,8 @@
           <div class="promise-card anim-up" style="--delay: 0.1s">
             <span class="tape tape-top-left"></span>
             <span class="tape tape-top-right"></span>
+            <div class="deco-sticker p8-env anim-float" style="--delay: 0.32s" id="p8-env" aria-hidden="true"></div>
+            <div class="deco-sticker p8-daisy anim-pop" style="--delay: 0.38s" id="p8-daisy" aria-hidden="true"></div>
 
             <span class="eyebrow-tag">A LITTLE PROMISE FROM MY SIDE🤞🏻</span>
             <h2 class="serif-heading">I’ll try to be better</h2>
@@ -397,6 +415,8 @@
 
           <div class="finale-letter-card anim-up" style="--delay: 0.1s">
             <span class="tape tape-top"></span>
+            <div class="deco-sticker p9-bear anim-pop" style="--delay: 0.34s" id="p9-bear" aria-hidden="true"></div>
+            <div class="deco-sticker p9-stamp anim-float" style="--delay: 0.4s" id="p9-stamp" aria-hidden="true"></div>
             <span class="eyebrow-tag">FROM MY HEART</span>
             <h2 class="script-heading">THE LAST PAGE🥺</h2>
 
