@@ -1295,10 +1295,19 @@ body {
   background: #fff;
   color: var(--ink-soft);
   border-color: rgba(184, 75, 100, 0.35);
+  user-select: none;
+  -webkit-user-select: none;
 }
 
-.gate-no:hover {
-  transform: translateY(-2px);
+.gate-no.is-running {
+  position: fixed;
+  z-index: 80;
+  margin: 0;
+  transition:
+    left 0.16s cubic-bezier(0.22, 1, 0.36, 1),
+    top 0.16s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.16s ease;
+  box-shadow: 0 10px 24px rgba(82, 42, 54, 0.2);
 }
 
 /* Keepsake Toast */

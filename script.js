@@ -508,29 +508,140 @@
   const gateAsk = document.getElementById("gate-state-ask");
   const gateRetry = document.getElementById("gate-state-retry");
   const gateYay = document.getElementById("gate-state-yay");
+  const btnGateNo = document.getElementById("btn-gate-no");
+  const btnGateYes = document.getElementById("btn-gate-yes");
+  const askSubtitle = gateAsk.querySelector(".gate-subtitle");
+  const defaultAskSubtitle = askSubtitle ? askSubtitle.textContent : "";
+  let noDodgeCount = 0;
+
+  const gateButtonsRow = gateAsk.querySelector(".gate-buttons");
+
+  function resetNoButton() {
+    noDodgeCount = 0;
+    btnGateNo.classList.remove("is-running");
+    btnGateNo.style.left = "";
+    btnGateNo.style.top = "";
+    btnGateNo.style.transform = "";
+    if (gateButtonsRow && btnGateNo.parentElement !== gateButtonsRow) {
+      gateButtonsRow.appendChild(btnGateNo);
+    }
+    if (askSubtitle) askSubtitle.textContent = defaultAskSubtitle;
+  }
+
+  function dodgeNoButton(pointerX = -999, pointerY = -999) {
+    if (gateModal.hidden || gateAsk.hidden) return;
+
+    const btnRect = btnGateNo.getBoundingClientRect();
+    const yesRect = btnGateYes.getBoundingClientRect();
+    const pad = 20;
+    const vw = window.innerWidth;
+    const vh = window.innerHeight;
+    const maxX = Math.max(pad, vw - btnRect.width - pad);
+    const maxY = Math.max(pad, vh - btnRect.height - pad);
+
+    let nextX = pad;
+    let nextY = pad;
+    let bestScore = -1;
+
+    // Pick a safe position far from cursor and not overlapping the YES button
+    for (let i = 0; i < 18; i++) {
+      const candidateX = pad + Math.random() * (maxX - pad);
+      const candidateY = pad + Math.random() * (maxY - pad);
+      const cx = candidateX + btnRect.width / 2;
+      const cy = candidateY + btnRect.height / 2;
+
+      const overlapsYes =
+        candidateX < yesRect.right + 16 &&
+        candidateX + btnRect.width > yesRect.left - 16 &&
+        candidateY < yesRect.bottom + 16 &&
+        candidateY + btnRect.height > yesRect.top - 16;
+      if (overlapsYes) continue;
+
+      const distFromPointer = Math.hypot(cx - pointerX, cy - pointerY);
+      const distFromCurrent = Math.hypot(
+        candidateX - btnRect.left,
+        candidateY - btnRect.top
+      );
+      const score = Math.min(distFromPointer, 320) + Math.min(distFromCurrent, 240);
+      if (distFromPointer > 150 && distFromCurrent > 90) {
+        nextX = candidateX;
+        nextY = candidateY;
+        break;
+      }
+      if (score > bestScore) {
+        bestScore = score;
+        nextX = candidateX;
+        nextY = candidateY;
+      }
+    }
+
+    if (btnGateNo.parentElement !== gateModal) {
+      gateModal.appendChild(btnGateNo);
+    }
+    btnGateNo.classList.add("is-running");
+    btnGateNo.style.left = `${Math.round(nextX)}px`;
+    btnGateNo.style.top = `${Math.round(nextY)}px`;
+    btnGateNo.style.transform = `rotate(${((Math.random() - 0.5) * 14).toFixed(1)}deg)`;
+
+    noDodgeCount += 1;
+    if (askSubtitle) {
+      if (noDodgeCount === 2) {
+        askSubtitle.textContent = "Hehe, you can't click NO 🥺👉👈";
+      } else if (noDodgeCount >= 5) {
+        askSubtitle.textContent = "Only YES works here, my love 🥰♥️";
+      }
+    }
+    playTone(620 + (noDodgeCount % 4) * 55, 0.08, "sine", 0);
+  }
 
   function showGateState(stateName) {
     gateAsk.hidden = stateName !== "ask";
     gateRetry.hidden = stateName !== "retry";
     gateYay.hidden = stateName !== "yay";
+    if (stateName !== "ask") resetNoButton();
   }
 
   function openGateModal() {
+    resetNoButton();
     showGateState("ask");
     gateModal.hidden = false;
     playSoftPop();
   }
 
   function closeGateModal() {
+    resetNoButton();
     gateModal.hidden = true;
   }
 
   document.getElementById("btn-open-question").addEventListener("click", openGateModal);
 
-  document.getElementById("btn-gate-no").addEventListener("click", () => {
-    showGateState("retry");
-    playTone(392, 0.16, "sine", 0);
-    playTone(349.23, 0.22, "sine", 0.12);
+  // Run away from cursor proximity, hover, touch, focus, or click
+  gateModal.addEventListener("pointermove", (e) => {
+    if (gateModal.hidden || gateAsk.hidden) return;
+    const rect = btnGateNo.getBoundingClientRect();
+    const cx = rect.left + rect.width / 2;
+    const cy = rect.top + rect.height / 2;
+    if (Math.hypot(e.clientX - cx, e.clientY - cy) < 85) {
+      dodgeNoButton(e.clientX, e.clientY);
+    }
+  });
+
+  ["pointerenter", "mouseenter", "mouseover", "pointerdown", "touchstart", "focus"].forEach(
+    (evtName) => {
+      btnGateNo.addEventListener(evtName, (e) => {
+        if (evtName === "touchstart" || evtName === "pointerdown") e.preventDefault();
+        const px = e.clientX ?? (e.touches && e.touches[0]?.clientX) ?? -999;
+        const py = e.clientY ?? (e.touches && e.touches[0]?.clientY) ?? -999;
+        btnGateNo.blur();
+        dodgeNoButton(px, py);
+      });
+    }
+  );
+
+  btnGateNo.addEventListener("click", (e) => {
+    e.preventDefault();
+    e.stopImmediatePropagation();
+    dodgeNoButton(e.clientX ?? -999, e.clientY ?? -999);
   });
 
   document.getElementById("btn-gate-okay").addEventListener("click", () => {
@@ -538,7 +649,7 @@
     playSoftPop();
   });
 
-  document.getElementById("btn-gate-yes").addEventListener("click", () => {
+  btnGateYes.addEventListener("click", () => {
     showGateState("yay");
     playChimeChord();
     const card = gateModal.querySelector(".gate-card");
