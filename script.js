@@ -471,11 +471,14 @@
     }
   });
 
-  // Page 7: 3 Keepsake Polaroids (tribute to Video's 3-Gift Picker!)
+  // Page 7: 6 Keepsake Polaroids (tribute to Video's Gift Collage!)
   const keepsakeMessages = {
     talks: "More rainy walks, random pictures & endless talks ☔💬",
     dates: "More sunlit food dates & laughing together 🍽️✨",
     team: "Always on the same team, even on messy days 😌💞",
+    movies: "More goofy movie selfies & teasing each other 🎬😘",
+    fluffy: "More pure happy days & smiling till our cheeks hurt 🐶💛",
+    hills: "More misty hill adventures hand-in-hand ⛰️🫶🏻",
   };
   const toastEl = document.getElementById("keepsake-toast");
   let toastTimer = null;

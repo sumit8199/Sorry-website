@@ -456,7 +456,7 @@ body {
 }
 
 .cover-collage-left .polaroid {
-  width: min(310px, 100%);
+  width: min(265px, 100%);
   transition: transform 0.35s ease;
 }
 
@@ -465,7 +465,50 @@ body {
 }
 
 .cover-collage-left .polaroid-art {
-  height: 255px;
+  height: 215px;
+}
+
+.tucked-mini-br {
+  position: absolute;
+  bottom: -24px;
+  right: -18px;
+  width: 106px;
+  padding: 6px 6px 8px;
+  z-index: 6;
+}
+
+.tucked-mini-br .mini-art {
+  height: 78px;
+}
+
+.tucked-poodle {
+  position: absolute;
+  top: -12px;
+  left: 4px;
+  width: 96px;
+  padding: 6px 6px 8px;
+  z-index: 6;
+}
+
+.tucked-poodle .mini-art {
+  height: 68px;
+}
+
+.confession-pair {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.confession-photo {
+  width: 108px;
+  padding: 6px 6px 8px;
+  margin: 0;
+}
+
+.confession-photo .mini-art {
+  height: 78px;
 }
 
 .badge-sorry-note {
@@ -1021,14 +1064,14 @@ body {
 .story-layout {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 14px;
   align-items: center;
 }
 
 .story-card {
   position: relative;
   background: var(--bg-paper);
-  padding: 22px 30px;
+  padding: 18px 26px;
   border-radius: 14px;
   box-shadow: var(--shadow-paper);
   border: 1.5px solid rgba(184, 75, 100, 0.16);
@@ -1038,9 +1081,9 @@ body {
 .keepsake-trio {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
+  gap: 12px 16px;
   width: 100%;
-  max-width: 760px;
+  max-width: 780px;
 }
 
 .keepsake-card {
@@ -1048,7 +1091,7 @@ body {
   background: #fff;
   border: 1px solid rgba(110, 66, 76, 0.1);
   border-radius: 6px;
-  padding: 12px 12px 14px;
+  padding: 8px 8px 10px;
   box-shadow: var(--shadow-paper);
   cursor: pointer;
   display: flex;
@@ -1058,15 +1101,16 @@ body {
 }
 
 .keepsake-card:hover {
-  transform: translateY(-6px) scale(1.04) rotate(0deg);
+  transform: translateY(-4px) scale(1.03) rotate(0deg);
   box-shadow: 0 18px 34px rgba(184, 75, 100, 0.22);
 }
 
 .keepsake-art {
   width: 100%;
-  height: 112px;
+  height: 74px;
   background: #fdf4f5;
   border-radius: 3px;
+  overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1074,10 +1118,10 @@ body {
 
 .keepsake-label {
   font-family: var(--font-script);
-  font-size: 1.32rem;
+  font-size: 1.15rem;
   font-weight: 700;
   color: var(--ink-plum);
-  margin-top: 8px;
+  margin-top: 5px;
 }
 
 /* ==================== PAGE 8: PROMISE & WAX SEAL ==================== */
@@ -1089,13 +1133,33 @@ body {
   align-items: center;
 }
 
+.promise-visual-col {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .promise-polaroid {
-  width: min(275px, 100%);
+  width: min(245px, 100%);
   justify-self: center;
 }
 
 .promise-polaroid .polaroid-art {
-  height: 230px;
+  height: 195px;
+}
+
+.tucked-mini-bl {
+  position: absolute;
+  top: -14px;
+  left: -18px;
+  width: 96px;
+  padding: 6px 6px 8px;
+  z-index: 6;
+}
+
+.tucked-mini-bl .mini-art {
+  height: 68px;
 }
 
 /* Real Photo & Cutout Sticker Styling */
@@ -1115,11 +1179,6 @@ body {
   object-position: center 62%;
 }
 
-.photo-cam {
-  object-position: center 50%;
-  transform: scale(1.26);
-}
-
 .cutout-sticker-img {
   width: 100%;
   height: 100%;
@@ -1129,30 +1188,40 @@ body {
 }
 
 .cutout-photo-card {
-  width: 190px;
-  height: 175px;
+  width: 165px;
+  height: 152px;
   animation: gentleFloat 4s ease-in-out infinite;
 }
 
-.confession-photo {
-  width: 145px;
-  margin: 0 auto 8px;
-  padding: 8px 8px 10px;
-}
-
-.confession-photo .mini-art {
-  height: 106px;
+.finale-visual-stack {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .cutout-tall-frame {
-  width: min(240px, 100%);
-  height: 280px;
+  width: min(200px, 100%);
+  height: 220px;
   animation: gentleFloat 4.2s ease-in-out infinite;
 }
 
+.tucked-hills {
+  position: absolute;
+  bottom: 4px;
+  left: -34px;
+  width: 102px;
+  padding: 6px 6px 8px;
+  z-index: 6;
+}
+
+.tucked-hills .mini-art {
+  height: 74px;
+}
+
 .yay-cutout-frame {
-  width: 215px;
-  height: 175px;
+  width: 190px;
+  height: 155px;
   margin: 0 auto 8px;
 }
 
@@ -1445,13 +1514,11 @@ body {
 @keyframes wordReveal {
   0% {
     opacity: 0;
-    transform: translateY(8px) scale(0.95);
-    filter: blur(2px);
+    transform: translateY(6px) scale(0.97);
   }
   100% {
     opacity: 1;
     transform: translateY(0) scale(1);
-    filter: blur(0);
   }
 }
 
@@ -1476,7 +1543,7 @@ body {
 }
 
 .slide.active .reveal-word {
-  animation: wordReveal 0.42s cubic-bezier(0.22, 1, 0.36, 1) calc(0.18s + var(--w, 0) * 0.024s) forwards;
+  animation: wordReveal 0.34s cubic-bezier(0.22, 1, 0.36, 1) calc(0.14s + var(--w, 0) * 0.014s) forwards;
 }
 
 .slide.active .script-heading,
@@ -1662,8 +1729,50 @@ body {
   }
 
   .keepsake-trio {
-    grid-template-columns: 1fr;
-    max-width: 260px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+  }
+
+  .keepsake-art {
+    height: 58px;
+  }
+
+  .keepsake-label {
+    font-size: 0.96rem;
+  }
+
+  .cover-collage-left .polaroid {
+    width: min(215px, 68vw);
+  }
+
+  .cover-collage-left .polaroid-art {
+    height: 170px;
+  }
+
+  .promise-polaroid {
+    width: min(205px, 68vw);
+  }
+
+  .promise-polaroid .polaroid-art {
+    height: 155px;
+  }
+
+  .cutout-tall-frame {
+    height: 155px;
+  }
+
+  .tucked-mini-br,
+  .tucked-poodle,
+  .tucked-mini-bl,
+  .tucked-hills {
+    width: 82px;
+  }
+
+  .tucked-mini-br .mini-art,
+  .tucked-poodle .mini-art,
+  .tucked-mini-bl .mini-art,
+  .tucked-hills .mini-art {
+    height: 56px;
   }
 
   .bottom-nav {
