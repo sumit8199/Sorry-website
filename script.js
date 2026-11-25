@@ -166,6 +166,17 @@
         { left: "42%", top: "9%" },
       ],
     },
+    {
+      // Page 10
+      items: ["just click YES ♥", "pretty please 🥺", "miss u so much", "🫂", "💌", "🥰"],
+      zones: [
+        { left: "5%", top: "20%" },
+        { right: "5%", top: "20%" },
+        { left: "7%", bottom: "16%" },
+        { right: "7%", bottom: "16%" },
+        { left: "46%", top: "9%" },
+      ],
+    },
   ];
 
   let ephemeralTimer = null;
@@ -342,27 +353,22 @@
 
     pageBadge.textContent = `Page ${currentIndex + 1} of ${totalSlides}`;
     btnPrev.disabled = currentIndex === 0;
-    btnNext.textContent = currentIndex === totalSlides - 1 ? "Answer 🥺" : "Next ›";
+    btnNext.disabled = currentIndex === totalSlides - 1;
+    btnNext.textContent = currentIndex === totalSlides - 1 ? "Final ♥" : "Next ›";
+    if (currentIndex !== totalSlides - 1) {
+      resetNoButton();
+    } else {
+      showGateState("ask");
+    }
     startEphemeralCycle(currentIndex);
     if (isUserAction) playSoftPop();
   }
 
   btnPrev.addEventListener("click", () => goToSlide(currentIndex - 1));
-  btnNext.addEventListener("click", () => {
-    if (currentIndex === totalSlides - 1) {
-      openGateModal();
-    } else {
-      goToSlide(currentIndex + 1);
-    }
-  });
+  btnNext.addEventListener("click", () => goToSlide(currentIndex + 1));
 
   // Keyboard navigation
   document.addEventListener("keydown", (e) => {
-    const gateModal = document.getElementById("gate-modal");
-    if (!gateModal.hidden) {
-      if (e.key === "Escape") closeGateModal();
-      return;
-    }
     if (e.key === "ArrowRight") goToSlide(currentIndex + 1);
     if (e.key === "ArrowLeft") goToSlide(currentIndex - 1);
   });
@@ -503,16 +509,16 @@
     }
   });
 
-  // ==================== PAGE 9: KITTEN GATE MODAL (Video 00:13-00:23) ====================
-  const gateModal = document.getElementById("gate-modal");
+  // ==================== PAGE 10: ACCEPT MY APOLOGY (Video 00:13-00:23 Tribute!) ====================
+  const gateCard = document.getElementById("gate-card");
   const gateAsk = document.getElementById("gate-state-ask");
-  const gateRetry = document.getElementById("gate-state-retry");
   const gateYay = document.getElementById("gate-state-yay");
   const btnGateNo = document.getElementById("btn-gate-no");
   const btnGateYes = document.getElementById("btn-gate-yes");
   const askSubtitle = gateAsk.querySelector(".gate-subtitle");
   const defaultAskSubtitle = askSubtitle ? askSubtitle.textContent : "";
   let noDodgeCount = 0;
+  let lastDodgeAt = 0;
 
   const gateButtonsRow = gateAsk.querySelector(".gate-buttons");
 
@@ -528,33 +534,39 @@
     if (askSubtitle) askSubtitle.textContent = defaultAskSubtitle;
   }
 
-  function dodgeNoButton(pointerX = -999, pointerY = -999) {
-    if (gateModal.hidden || gateAsk.hidden) return;
+  function isApologyAskActive() {
+    return currentIndex === totalSlides - 1 && !gateAsk.hidden;
+  }
+
+  function dodgeNoButton(pointerX = -999, pointerY = -999, force = false) {
+    if (!isApologyAskActive()) return;
+    const now = Date.now();
+    if (!force && now - lastDodgeAt < 65) return;
+    lastDodgeAt = now;
 
     const btnRect = btnGateNo.getBoundingClientRect();
     const yesRect = btnGateYes.getBoundingClientRect();
-    const pad = 20;
-    const vw = window.innerWidth;
-    const vh = window.innerHeight;
-    const maxX = Math.max(pad, vw - btnRect.width - pad);
-    const maxY = Math.max(pad, vh - btnRect.height - pad);
+    const padX = 24;
+    const minY = 66;
+    const maxY = Math.max(minY, window.innerHeight - btnRect.height - 78);
+    const maxX = Math.max(padX, window.innerWidth - btnRect.width - padX);
 
-    let nextX = pad;
-    let nextY = pad;
+    let nextX = padX;
+    let nextY = minY;
     let bestScore = -1;
 
     // Pick a safe position far from cursor and not overlapping the YES button
-    for (let i = 0; i < 18; i++) {
-      const candidateX = pad + Math.random() * (maxX - pad);
-      const candidateY = pad + Math.random() * (maxY - pad);
+    for (let i = 0; i < 24; i++) {
+      const candidateX = padX + Math.random() * (maxX - padX);
+      const candidateY = minY + Math.random() * (maxY - minY);
       const cx = candidateX + btnRect.width / 2;
       const cy = candidateY + btnRect.height / 2;
 
       const overlapsYes =
-        candidateX < yesRect.right + 16 &&
-        candidateX + btnRect.width > yesRect.left - 16 &&
-        candidateY < yesRect.bottom + 16 &&
-        candidateY + btnRect.height > yesRect.top - 16;
+        candidateX < yesRect.right + 20 &&
+        candidateX + btnRect.width > yesRect.left - 20 &&
+        candidateY < yesRect.bottom + 20 &&
+        candidateY + btnRect.height > yesRect.top - 20;
       if (overlapsYes) continue;
 
       const distFromPointer = Math.hypot(cx - pointerX, cy - pointerY);
@@ -562,8 +574,8 @@
         candidateX - btnRect.left,
         candidateY - btnRect.top
       );
-      const score = Math.min(distFromPointer, 320) + Math.min(distFromCurrent, 240);
-      if (distFromPointer > 150 && distFromCurrent > 90) {
+      const score = Math.min(distFromPointer, 340) + Math.min(distFromCurrent, 260);
+      if (distFromPointer > 170 && distFromCurrent > 100) {
         nextX = candidateX;
         nextY = candidateY;
         break;
@@ -575,8 +587,8 @@
       }
     }
 
-    if (btnGateNo.parentElement !== gateModal) {
-      gateModal.appendChild(btnGateNo);
+    if (btnGateNo.parentElement !== document.body) {
+      document.body.appendChild(btnGateNo);
     }
     btnGateNo.classList.add("is-running");
     btnGateNo.style.left = `${Math.round(nextX)}px`;
@@ -596,32 +608,31 @@
 
   function showGateState(stateName) {
     gateAsk.hidden = stateName !== "ask";
-    gateRetry.hidden = stateName !== "retry";
     gateYay.hidden = stateName !== "yay";
-    if (stateName !== "ask") resetNoButton();
-  }
-
-  function openGateModal() {
     resetNoButton();
-    showGateState("ask");
-    gateModal.hidden = false;
-    playSoftPop();
   }
 
-  function closeGateModal() {
-    resetNoButton();
-    gateModal.hidden = true;
-  }
+  document.getElementById("btn-open-question").addEventListener("click", () => {
+    goToSlide(totalSlides - 1);
+  });
 
-  document.getElementById("btn-open-question").addEventListener("click", openGateModal);
-
-  // Run away from cursor proximity, hover, touch, focus, or click
-  gateModal.addEventListener("pointermove", (e) => {
-    if (gateModal.hidden || gateAsk.hidden) return;
+  // Run away from cursor proximity anywhere on the page whenever hovered or approached
+  document.addEventListener("pointermove", (e) => {
+    if (!isApologyAskActive()) return;
     const rect = btnGateNo.getBoundingClientRect();
     const cx = rect.left + rect.width / 2;
     const cy = rect.top + rect.height / 2;
-    if (Math.hypot(e.clientX - cx, e.clientY - cy) < 85) {
+    if (Math.hypot(e.clientX - cx, e.clientY - cy) < 95) {
+      dodgeNoButton(e.clientX, e.clientY);
+    }
+  });
+
+  document.addEventListener("mousemove", (e) => {
+    if (!isApologyAskActive()) return;
+    const rect = btnGateNo.getBoundingClientRect();
+    const cx = rect.left + rect.width / 2;
+    const cy = rect.top + rect.height / 2;
+    if (Math.hypot(e.clientX - cx, e.clientY - cy) < 95) {
       dodgeNoButton(e.clientX, e.clientY);
     }
   });
@@ -633,7 +644,7 @@
         const px = e.clientX ?? (e.touches && e.touches[0]?.clientX) ?? -999;
         const py = e.clientY ?? (e.touches && e.touches[0]?.clientY) ?? -999;
         btnGateNo.blur();
-        dodgeNoButton(px, py);
+        dodgeNoButton(px, py, true);
       });
     }
   );
@@ -641,28 +652,17 @@
   btnGateNo.addEventListener("click", (e) => {
     e.preventDefault();
     e.stopImmediatePropagation();
-    dodgeNoButton(e.clientX ?? -999, e.clientY ?? -999);
-  });
-
-  document.getElementById("btn-gate-okay").addEventListener("click", () => {
-    showGateState("ask");
-    playSoftPop();
+    dodgeNoButton(e.clientX ?? -999, e.clientY ?? -999, true);
   });
 
   btnGateYes.addEventListener("click", () => {
     showGateState("yay");
     playChimeChord();
-    const card = gateModal.querySelector(".gate-card");
-    spawnBurstFromElement(card, ["♥️", "🫂", "🥰", "🌸", "✨", "💌"], 24);
+    spawnBurstFromElement(gateCard, ["♥️", "🫂", "🥰", "🌸", "✨", "💌"], 24);
   });
 
   document.getElementById("btn-gate-close").addEventListener("click", () => {
-    closeGateModal();
     goToSlide(0);
-  });
-
-  gateModal.addEventListener("click", (e) => {
-    if (e.target === gateModal) closeGateModal();
   });
 
   // ==================== BACKGROUND CLICK SPARKLE ====================

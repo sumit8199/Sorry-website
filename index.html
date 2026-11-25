@@ -439,6 +439,39 @@
         </div>
       </section>
 
+      <!-- ==================== PAGE 10: ACCEPT MY APOLOGY (Video 00:13-00:23 Tribute!) ==================== -->
+      <section class="slide" data-slide="9" aria-label="Page 10: Accept My Apology">
+        <div class="slide-inner gate-slide-layout">
+          <div class="gate-card anim-pop" style="--delay: 0.1s" id="gate-card">
+            <span class="tape tape-top-left"></span>
+            <span class="tape tape-top-right"></span>
+
+            <!-- State 1: Ask -->
+            <div class="gate-state" id="gate-state-ask">
+              <div class="gate-kitty anim-float" id="art-gate-kitty-ask"></div>
+              <h2 class="gate-title" id="gate-title">Accept my apology? 🥺</h2>
+              <p class="gate-subtitle">Promise I'll make it up to you with hugs &amp; food dates</p>
+              <div class="gate-buttons">
+                <button type="button" class="gate-btn gate-yes" id="btn-gate-yes">YES ♥️</button>
+                <button type="button" class="gate-btn gate-no" id="btn-gate-no">NO</button>
+              </div>
+            </div>
+
+            <!-- State 2: Yay Accepted! -->
+            <div class="gate-state" id="gate-state-yay" hidden>
+              <div class="gate-kitty anim-float" id="art-gate-kitty-happy"></div>
+              <h2 class="gate-title">Yay!! Thank you, my love 🥰♥️</h2>
+              <p class="gate-subtitle">
+                I love you, I miss you, and I can't wait to hug you tight! 🫂💞
+              </p>
+              <div class="gate-buttons">
+                <button type="button" class="gate-btn gate-yes" id="btn-gate-close">Read again 💌</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
     </div>
 
     <!-- Bottom Slide Navigation Bar -->
@@ -454,46 +487,6 @@
       </button>
     </nav>
   </main>
-
-  <!-- ==================== INTERACTIVE KITTEN GATE MODAL (Video 00:13-00:23 Tribute!) ==================== -->
-  <div class="modal-backdrop" id="gate-modal" hidden role="dialog" aria-modal="true" aria-labelledby="gate-title">
-    <div class="gate-card">
-      <span class="tape tape-top"></span>
-
-      <!-- State 1: Ask -->
-      <div class="gate-state" id="gate-state-ask">
-        <div class="gate-kitty" id="art-gate-kitty-ask"></div>
-        <h2 class="gate-title" id="gate-title">Accept my apology? 🥺</h2>
-        <p class="gate-subtitle">Promise I'll make it up to you with hugs &amp; food dates</p>
-        <div class="gate-buttons">
-          <button type="button" class="gate-btn gate-yes" id="btn-gate-yes">YES ♥️</button>
-          <button type="button" class="gate-btn gate-no" id="btn-gate-no">NO</button>
-        </div>
-      </div>
-
-      <!-- State 2: Playful "Please try again" (exactly like Video 00:17!) -->
-      <div class="gate-state" id="gate-state-retry" hidden>
-        <div class="gate-kitty" id="art-gate-kitty-sad"></div>
-        <h2 class="gate-title">Please try again 🥺</h2>
-        <p class="gate-subtitle">Look at this little face... pretty please?</p>
-        <div class="gate-buttons">
-          <button type="button" class="gate-btn gate-yes" id="btn-gate-okay">OKAY</button>
-        </div>
-      </div>
-
-      <!-- State 3: Yay Accepted! -->
-      <div class="gate-state" id="gate-state-yay" hidden>
-        <div class="gate-kitty" id="art-gate-kitty-happy"></div>
-        <h2 class="gate-title">Yay!! Thank you, my love 🥰♥️</h2>
-        <p class="gate-subtitle">
-          I love you, I miss you, and I can't wait to hug you tight! 🫂💞
-        </p>
-        <div class="gate-buttons">
-          <button type="button" class="gate-btn gate-yes" id="btn-gate-close">Read again 💌</button>
-        </div>
-      </div>
-    </div>
-  </div>
 
   <!-- Keepsake Toast Popup for Page 7 Polaroids -->
   <div class="keepsake-toast" id="keepsake-toast" hidden role="status" aria-live="polite"></div>
