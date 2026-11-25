@@ -442,7 +442,7 @@
 
   // Page 5: "Rewind & Hug Instead" toggle
   const btnRedoMoment = document.getElementById("btn-redo-moment");
-  const redoScene = document.getElementById("art-redo-scene");
+  const redoImg = document.getElementById("redo-img");
   const redoPolaroid = document.getElementById("redo-polaroid");
   const redoCaption = document.getElementById("redo-caption");
   const redoBtnLabel = document.getElementById("redo-btn-label");
@@ -453,13 +453,19 @@
     btnRedoMoment.classList.toggle("is-done", isHealed);
     redoPolaroid.classList.toggle("is-healed", isHealed);
     if (isHealed) {
-      redoScene.innerHTML = window.SVG_ASSETS.redoHug;
+      if (redoImg) {
+        redoImg.src = "photos/p5-hug.jpg";
+        redoImg.alt = "Hugging together by the lake";
+      }
       redoCaption.textContent = "hugging you instead of arguing 🫂";
       redoBtnLabel.textContent = "Show Hurt Moment Again";
       spawnBurstFromElement(redoPolaroid, ["🫂", "♥️", "😘", "✨"], 14);
       playChimeChord();
     } else {
-      redoScene.innerHTML = window.SVG_ASSETS.redoHurt;
+      if (redoImg) {
+        redoImg.src = "photos/p5-alone.jpg";
+        redoImg.alt = "Missing you";
+      }
       redoCaption.textContent = "what I wish I did instead...";
       redoBtnLabel.textContent = "Rewind & Hug Instead";
     }
@@ -467,8 +473,8 @@
 
   // Page 7: 3 Keepsake Polaroids (tribute to Video's 3-Gift Picker!)
   const keepsakeMessages = {
-    talks: "More 2 AM sleepy voice notes & endless talks 🌙💬",
-    dates: "More food dates where we steal bites from each other 🧁🍟",
+    talks: "More rainy walks, random pictures & endless talks ☔💬",
+    dates: "More sunlit food dates & laughing together 🍽️✨",
     team: "Always on the same team, even on messy days 😌💞",
   };
   const toastEl = document.getElementById("keepsake-toast");
